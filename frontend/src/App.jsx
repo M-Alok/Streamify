@@ -1,4 +1,7 @@
 import { Routes, Route } from 'react-router';
+import { Toaster } from 'react-hot-toast';
+import { useQuery } from '@tanstack/react-query';
+import axiosInstance from './lib/axios';
 
 import HomePage from './pages/HomePage';
 import SignUpPage from './pages/SignupPage';
@@ -8,9 +11,19 @@ import NotificationsPage from './pages/NotificationsPage';
 import ChatPage from './pages/ChatPage';
 import CallPage from './pages/CallPage';
 
-import { Toaster } from 'react-hot-toast';
 
-function App() {
+const App = () => {
+  const { data } = useQuery({
+    queryKey: ['dodos'],
+    queryFn: async () => {
+      const res = await axiosInstance.get('/auth/checkAuth');
+      return res.data;
+    },
+    retry: false,
+  });
+
+  console.log(data);
+
   return (
     <div className="h-screen">
       <Routes>
