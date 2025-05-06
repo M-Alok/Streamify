@@ -36,11 +36,11 @@ const Navbar = () => {
 
           <ThemeSelector />
 
-          <div className="avatar">
+          {/* <div className="avatar">
             <div className="w-9 rounded-full">
               <img src={authUser?.profilePic} alt="User Avatar" rel="noreferrer" />
             </div>
-          </div>
+          </div> */}
 
           <button className="btn btn-ghost btn-circle" onClick={logoutMutation}>
             <LogOutIcon className="h-6 w-6 text-base-content opacity-70" />
