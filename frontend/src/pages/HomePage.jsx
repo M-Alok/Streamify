@@ -25,7 +25,7 @@ const HomePage = () => {
     queryFn: getMyFriends,
   });
 
-  const { data:outgoingFrndReqs } = useQuery({
+  const { data:outgoingFriendReqs } = useQuery({
     queryKey: ['outgoingFrndReqs'],
     queryFn: getOutgoingFrndReqs,
   });
@@ -37,13 +37,13 @@ const HomePage = () => {
 
   useEffect(() => {
     const ougoingIds = new Set();
-    if (outgoingFrndReqs && outgoingFrndReqs.length > 0) {
-      outgoingFrndReqs.forEach(req => {
+    if (outgoingFriendReqs && outgoingFriendReqs.length > 0) {
+      outgoingFriendReqs.forEach(req => {
         ougoingIds.add(req.recipient._id);
       });
       setOutgoingRequestIds(ougoingIds);
     }
-  }, [outgoingFrndReqs]);
+  }, [outgoingFriendReqs]);
 
   return (
     <div  className="p-4 sm:p-6 lg:p-8">
