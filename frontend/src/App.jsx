@@ -56,11 +56,9 @@ const App = () => {
             <Navigate to={!isAuthenticated ? '/login' : '/onboarding'} />
           )}
         />
-        <Route path='/call' element={
+        <Route path='/call/:id' element={
           isAuthenticated && isOnboarded ? (
-            <Layout showSidebar={false}>
-              <CallPage />
-            </Layout>
+            <CallPage />
           ) : (
             <Navigate to={!isAuthenticated ? '/login' : '/onboarding'} />
           )
