@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { acceptFriendRequest, getFriendRequests } from "../lib/api";
 import { BellIcon, ClockIcon, MessageSquareIcon, UserCheckIcon } from "lucide-react";
 import NoNotificationsFound from "../components/NoNotificationsFound";
+import toast from "react-hot-toast";
 
 const NotificationsPage = () => {
   const queryClient = useQueryClient();
@@ -18,6 +19,13 @@ const NotificationsPage = () => {
       queryClient.invalidateQueries({ queryKey: ['friends'] });
     }
   });
+
+  const handleAcceptReqs = (requestId) => {
+    acceptRequestMutation(requestId, {
+      onSuccess: () => {toast.success('Friend request accepted successfully!')},
+      onError: (error) => {toast.error(error?.response?.data?.message || 'Failed to accept friend request.')},
+    });
+  }
 
   const incomingRequests = friendRequests?.incomingRequests || [];
   const acceptedRequest = friendRequests?.acceptedRequest || [];
@@ -68,7 +76,7 @@ const NotificationsPage = () => {
 
                           <button
                             className="btn btn-primary btn-sm"
-                            onClick={() => acceptRequestMutation(request._id)}
+                            onClick={() => handleAcceptReqs(request._id)}
                             disabled={isPending}
                           >
                             Accept
