@@ -12,6 +12,7 @@ import PageLoader from './components/PageLoader';
 import useAuthUser from './hooks/useAuthUser';
 import Layout from './components/Layout';
 import useThemeStore from './store/useThemeStore';
+import FriendsComp from './components/FriendsComp';
 
 
 const App = () => {
@@ -29,6 +30,15 @@ const App = () => {
       <Routes>
         <Route path='/signup' element={ !isAuthenticated ? <SignUpPage /> : <Navigate to={isOnboarded ? '/' : '/onboarding'} /> } />
         <Route path='/login' element={ !isAuthenticated ? <LoginPage /> : <Navigate to={isOnboarded ? '/' : '/onboarding'} /> } />
+        <Route path='/friends' element={
+          isAuthenticated && isOnboarded ? (
+            <Layout showSidebar={true}>
+              <FriendsComp />
+            </Layout>
+          ) : (
+            <Navigate to={!isAuthenticated ? '/login' : '/onboarding'} />
+          )
+        } />
         <Route path='/' element={
           isAuthenticated && isOnboarded ? (
             <Layout showSidebar={true}>
