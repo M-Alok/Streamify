@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { LockKeyhole, ShipWheelIcon, User } from "lucide-react";
+import { toast } from "react-hot-toast";
 
 import useLogin from "../hooks/useLogin";
 
@@ -15,6 +16,19 @@ const LoginPage = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     loginMutation(loginData);
+  }
+
+  const handelGuestUser = () => {
+    try {
+      setLoginData({
+        email: import.meta.env.VITE_GUEST_EMAIL,
+        password: import.meta.env.VITE_GUEST_PASSWORD,
+      });
+      toast.success('Guest user credentials are set.\nPlease sign in.');
+    } catch (error) {
+      console.log('Error in handelGuestUser: ', error);
+      toast.error('Unable to set guest user credentials');
+    }
   }
 
   return (
@@ -90,6 +104,14 @@ const LoginPage = () => {
                     ) : (
                       "Sign In"
                     )}
+                  </button>
+
+                  <button
+                    type="button"
+                    className="btn bg-[var(--fallback-bc,oklch(var(--bc)/0.2))] hover:bg-[var(--fallback-bc,oklch(var(--bc)/0.4))] w-full"
+                    onClick={handelGuestUser}
+                  >
+                    Get guest user credentials
                   </button>
 
                   <div className="text-center mt-4">
