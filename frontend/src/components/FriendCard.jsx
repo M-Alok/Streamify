@@ -4,7 +4,7 @@ import { getLanguageFlag } from "../lib/utils";
 const FriendCard = ({ friend }) => {
   return (
     <div className="card bg-base-200 hover:shadow-md transition-shadow">
-      <div className="card-body p-4">
+      <div className="card-body p-3">
 
         <div className="flex items-center gap-3 mb-3">
           <div className="avatar size-12">
