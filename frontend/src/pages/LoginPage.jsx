@@ -20,10 +20,11 @@ const LoginPage = () => {
 
   const handelGuestUser = () => {
     try {
-      setLoginData({
-        email: import.meta.env.VITE_GUEST_EMAIL,
-        password: import.meta.env.VITE_GUEST_PASSWORD,
-      });
+      const guestCredentials = {
+        email: import.meta.env.VITE_GUEST_EMAIL || 'guest@gmail.com',
+        password: import.meta.env.VITE_GUEST_PASSWORD || 'guest@1234',
+      };
+      setLoginData(guestCredentials);
       toast.success('Guest user credentials are set.\nPlease sign in.');
     } catch (error) {
       console.log('Error in handelGuestUser: ', error);
